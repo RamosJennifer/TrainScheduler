@@ -8,10 +8,34 @@ var firebaseConfig = {
     storageBucket: "train-scheduler-671e3.appspot.com",
     messagingSenderId: "1036719751741",
     appId: "1:1036719751741:web:f62107e67722a53c"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+};
+
+firebase.initializeApp(firebaseConfig);
 
 
 
-  var database = firebase.database();
+var database = firebase.database();
+
+$("body").on("click", "#submit-id", function (event) {
+
+    event.preventDefault();
+
+    var trainName = $("#trainNameId").val().trim();
+    var destId = $("#destId").val().trim();
+    var firstTrainTime = $("#firstTrainId").val().trim();
+    var freqId = $("#freqId").val().trim();
+
+    database.ref().push(
+        {
+            trainName: trainName,
+            destination: destId,
+            firstTrainTime: firstTrainTime,
+            frequency: freqId,
+            arrival: nextTrain,
+            minutesAway: minutesAway,
+        });
+
+
+});
+
+//moment.js
